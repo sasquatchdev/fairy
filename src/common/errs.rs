@@ -7,6 +7,14 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum Error {
+    /// error that occurs when the `env_logger` crate
+    /// fails to properly initialize itself.
+
+    #[error("failed to initialize/set env_logger. {ctx}", ctx = source)]
+    Log {
+        #[from] #[source]
+        source: log::SetLoggerError,
+    }
 }
 
 /// wrapper around std::result::Result, for easier

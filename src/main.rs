@@ -5,6 +5,8 @@
 /// handling system, logging, configuration,
 /// etc.
 pub mod common;
+pub use common::errs::*;
+use common::logs;
 
 /// module that contains all built-in
 /// components.
@@ -27,6 +29,12 @@ pub mod system;
 /// safe abstraction.
 pub mod display;
 
-fn main() {
-    println!("Hello, world!");
+fn main() -> ResultVoid {
+    logs::init()?;
+    log::info!("starting up at {}.", logs::time());
+
+    // ...
+
+    log::info!("shutting down at {}.", logs::time());
+    Ok(())
 }
