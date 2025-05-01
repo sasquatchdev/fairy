@@ -11,10 +11,34 @@ pub enum Error {
     /// fails to properly initialize itself.
 
     #[error("failed to initialize/set env_logger. {ctx}", ctx = source)]
-    Log {
+    LogInit {
         #[from] #[source]
         source: log::SetLoggerError,
-    }
+    },
+
+    /// error that occurs when the `glfw` crate
+    /// fails to properly initialize itself.
+    
+    #[error("failed to initialize glfw. {ctx}", ctx = source)]
+    GlfwInit {
+        #[from] #[source]
+        source: glfw::InitError,
+    },
+
+    /// error that occurs when the `glfw` crate
+    /// fails to create a window.
+    
+    #[error("failed to create glfw window.")]
+    GlfwWindow,
+
+    /// error that occurs when the `gl` crate 
+    /// fails to properly initialize itself or
+    /// load the opengl functions.
+    
+    #[error("failed to initialize opengl. {ctx}", ctx = context)]
+    GlInit {
+        context: String
+    },
 }
 
 /// wrapper around std::result::Result, for easier

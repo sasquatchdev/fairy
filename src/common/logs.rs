@@ -12,7 +12,7 @@ use crate::*;
 pub fn init() -> ResultVoid {
     // initialize the env_logger
     let result = env_logger::builder()
-        .filter(None, log::LevelFilter::Info)
+        .filter(None, log::LevelFilter::Debug)
         .format_timestamp(None)
         .format_module_path(false)
         .format_target(true)
